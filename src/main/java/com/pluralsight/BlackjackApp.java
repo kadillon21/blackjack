@@ -9,12 +9,15 @@ public class BlackjackApp {
     public static void main(String[] args) {
 
         boolean addPlayer = true;
-        ArrayList<String> players = new ArrayList<>();
+        ArrayList<Player> players = new ArrayList<>();
 
         while (addPlayer && players.size() <= 7) {
-            players.add(UserInput.promptForString("Enter Player " + (players.size() + 1) + "'s name "));
+            String name = UserInput.promptForString("Enter Player " + (players.size() + 1) + "'s name ");
+            Player player = new Player(name);
 
-            if (!(players.size() == 7)) {
+            players.add(player);
+
+            if (players.size() != 7) {
                 if (UserInput.promptForChar("Add another player? [Y/N] ", "YN") == 'N') {
                     addPlayer = false;
                 }
@@ -22,6 +25,11 @@ public class BlackjackApp {
 
             System.out.println(players.toString());
         }
+
+        Deck deck = new Deck();
+        Hand hand = new Hand();
+
+        deck.shuffle();
     }
 }
 
