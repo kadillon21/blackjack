@@ -9,8 +9,9 @@ public class BlackjackApp {
     public static void main(String[] args) {
 
         boolean addPlayer = true;
-        ArrayList<Player> players = new ArrayList<>();
+        ArrayList<Player> players = new ArrayList<>(); // Players will be stored in this list
 
+        // Loop ask player for name and if they want to add a new player
         while (addPlayer && players.size() <= 7) {
             String name = UserInput.promptForString("Enter Player " + (players.size() + 1) + "'s name ");
             Player player = new Player(name);
@@ -22,14 +23,18 @@ public class BlackjackApp {
                     addPlayer = false;
                 }
             }
-
-            System.out.println(players.toString());
         }
 
+        // Creates a new deck
         Deck deck = new Deck();
-        Hand hand = new Hand();
-
         deck.shuffle();
+
+        // Adds two cards to each players hand
+        for(Player player : players){
+            Hand hand = player.getHand();
+            hand.deal(deck.deal());
+            hand.deal(deck.deal());
+        }
     }
 }
 
