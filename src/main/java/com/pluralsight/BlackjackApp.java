@@ -9,6 +9,8 @@ public class BlackjackApp {
     public static void main(String[] args) {
 
         boolean addPlayer = true;
+        String winner = "";
+        int highestScore = 0;
         ArrayList<Player> players = new ArrayList<>(); // Players will be stored in this list
 
         // Loop ask player for name and if they want to add a new player
@@ -34,7 +36,18 @@ public class BlackjackApp {
             Hand hand = player.getHand();
             hand.deal(deck.deal());
             hand.deal(deck.deal());
+
+            System.out.println(player.getName() + " got a score of " + hand.getValue());
+
+            if (hand.getValue() > highestScore){
+                winner = player.getName();
+                highestScore = hand.getValue();
+            } else if (hand.getValue() == highestScore){
+                System.out.println("Multiple winners, try again");
+            }
         }
+
+        System.out.println("The winner is: " + winner);
     }
 }
 
